@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stiva</title>
+</head>
+<body>
+
+<script>
+    class Cell {
+        constructor(info) {
+            this.info = info
+        }
+    }
+
+    let stiva = {}
+
+    const addToList = (info) => {
+        if (!String(info).trim()) {
+            return;
+        }
+        if (!stiva.info) {
+            stiva.info = String(info)
+            return;
+        }
+        const newItem = new Cell(String(info))
+        newItem.urm = stiva
+        stiva = newItem
+    }
+    const showList = () => {
+        let stivaImage = {...stiva}
+
+        while (stivaImage && stivaImage.info) {
+            console.log(stivaImage.info)
+            stivaImage = stivaImage.urm
+        }
+    }
+    const getItem = () => {
+        const stivaImage = stiva
+        if (!stivaImage.info) {
+            return;
+        }
+
+        const info = stivaImage.info
+        if (stivaImage.urm) {
+            stivaImage.info = stivaImage.urm.info
+            stivaImage.urm = stivaImage.urm.urm
+            return info;
+        }
+        stivaImage.info = undefined
+        return info;
+
+    }
+    const removeItem = (id) => {
+        let stivaImage = stiva
+
+        while (stivaImage && stivaImage.info) {
+            if (stivaImage.info === String(id)) {
+                if (stivaImage.urm) {
+                    stivaImage.info = stivaImage.urm.info
+                    stivaImage.urm = stivaImage.urm.urm
+                    return;
+                }
+                stivaImage.info = undefined
+                return;
+            }
+            if (stivaImage.urm && stivaImage.urm.info === String(id)) {
+                stivaImage.urm = stivaImage.urm.urm
+                return;
+            }
+            stivaImage = stivaImage.urm
+        }
+    }
+
+    const infoList = [
+        "primul",
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+    ]
+    for (const info of infoList) {
+        addToList(info)
+    }
+</script>
+
+</body>
+</html>
