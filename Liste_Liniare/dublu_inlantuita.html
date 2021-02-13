@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lista dublu inlatuita</title>
+</head>
+<body>
+
+<script>
+    class Cell {
+        constructor(info) {
+            this.info = info
+        }
+    }
+
+    class Peaks {
+        constructor(props) {
+            this.first = {}
+            this.last = this.first
+            this.crossPeak = {
+                first: "last",
+                last: "first"
+            }
+            this.crossPeakLink = {
+                first: {
+                    prev: "prev",
+                    next: "next"
+                },
+                last: {
+                    prev: "next",
+                    next: "prev"
+                }
+            }
+        }
+
+        addTo(peak, info) {
+            if (this[peak].info) {
+                const newItem = new Cell(String(info))
+
+                this[peak][this.crossPeakLink[peak].prev] = newItem
+                newItem[this.crossPeakLink[peak].next] = this[peak]
+                this[peak] = newItem
+                return;
+            }
+            this[peak].info = String(info)
+        }
+
+        showFrom(peak) {
+            let tempCell = this[peak]
+            while (tempCell && tempCell.info) {
+                console.log(tempCell.info)
+                tempCell = tempCell[this.crossPeakLink[peak].next]
+            }
+        }
+
+        getFrom(peak) {
+            if (!this[peak].info) {
+                return "List is empty"
+            }
+            const info = this[peak].info
+            this[peak] = this[peak][this.crossPeakLink[peak].next]
+
+            if (!this[peak]) {
+                this[peak] = {}
+                this[this.crossPeak[peak]] = this[peak]
+                return info;
+            }
+            this[peak][this.crossPeakLink[peak].prev] = undefined
+
+            return info;
+        }
+
+        removeItemStartFrom(peak, id) {
+            const next = this.crossPeakLink[peak].next
+            const prev = this.crossPeakLink[peak].prev
+            let tempCell = this[peak]
+
+            while (tempCell && tempCell.info) {
+                if (tempCell.info === String(id)) {
+                    if (tempCell[next]) {
+                        tempCell[next][prev] = tempCell[prev]
+                    }
+                    if (tempCell[prev]) {
+                        tempCell[prev][next] = tempCell[next]
+                    }
+                    if (!tempCell[next] && !tempCell[prev]) {
+                        this[peak] = {}
+                        this[this.crossPeak[peak]] = this[peak]
+                    }
+                    return;
+                }
+                tempCell = tempCell[next]
+            }
+        }
+    }
+
+    const peaks = new Peaks()
+
+    const infoList = [
+        "primul",
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+    ]
+    for (const info of infoList) {
+        peaks.addTo("first", info)
+    }
+</script>
+
+</body>
+</html>

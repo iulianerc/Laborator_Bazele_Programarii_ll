@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>coada</title>
+</head>
+<body>
+
+<script>
+    class Cell {
+        constructor(info) {
+            this.info = info
+        }
+    }
+
+    const coada = {}
+    let ultimul = coada
+
+    const addToList = (info) => {
+        if (!String(info).trim()) {
+            return;
+        }
+        if (!ultimul.info) {
+            ultimul.info = String(info)
+            return;
+        }
+        const newItem = new Cell(String(info))
+        ultimul.urm = newItem
+        ultimul = newItem
+    }
+    const showList = () => {
+        let coadaImage = coada
+
+        while (coadaImage && coadaImage.info) {
+            console.log(coadaImage.info)
+            coadaImage = coadaImage.urm
+        }
+    }
+    const getItem = () => {
+        const coadaImage = coada
+        if (!coadaImage.info) {
+            return "List is empty";
+        }
+
+        const info = coadaImage.info
+        if (coadaImage.urm) {
+            coadaImage.info = coadaImage.urm.info
+            coadaImage.urm = coadaImage.urm.urm
+            return info;
+        }
+        coadaImage.info = undefined
+        ultimul = coadaImage
+        return info;
+
+    }
+    const removeItem = (id) => {
+        let coadaImage = coada
+
+        while (coadaImage && coadaImage.info) {
+            if (coadaImage.info === String(id)) {
+                if (coadaImage.urm) {
+                    coadaImage.info = coadaImage.urm.info
+                    coadaImage.urm = coadaImage.urm.urm
+                    return;
+                }
+                coadaImage.info = undefined
+                ultimul = coadaImage
+                return;
+            }
+            if (coadaImage.urm && coadaImage.urm.info === String(id)) {
+                coadaImage.urm = coadaImage.urm.urm
+                if (!coadaImage.urm) {
+                    ultimul = coadaImage
+                }
+                return;
+            }
+            coadaImage = coadaImage.urm
+        }
+    }
+
+    const infoList = [
+        "first",
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+    ]
+    for (const info of infoList) {
+        addToList(info)
+    }
+</script>
+
+</body>
+</html>
