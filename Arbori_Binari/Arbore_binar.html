@@ -42,7 +42,7 @@
             left: 200px;
         }
         #showJSON {
-            left: 400px;
+            left: 370px;
             width: 270px;
         }
     </style>
@@ -81,6 +81,11 @@
         }
     }
 
+    const tree = document.getElementById("tree")
+    const createTree = document.getElementById("create")
+    const loadTree = document.getElementById("load")
+    const showJSON = document.getElementById("showJSON")
+    const jsonBlock = document.getElementById("JSON")
     const nodes = ["left", "right"]
     const data = {
         name: "root",
@@ -370,19 +375,16 @@
             }
         }
     }
-    const tree = document.getElementById("tree")
-    const createTree = document.getElementById("create")
-    const loadTree = document.getElementById("load")
-    const showJSON = document.getElementById("showJSON")
-    const jsonBlock = document.getElementById("JSON")
     let root = new Node("root")
 
     createTree.addEventListener("click", () => {
         root = new Node("root")
         addCell(root)
+        findCountOfSubNodes(root)
         tree.innerHTML = showTree(root, 0)
     })
     loadTree.addEventListener("click", () => {
+        findCountOfSubNodes(tempData)
         tree.innerHTML = showTree(tempData, 0)
     })
     showJSON.addEventListener("click", () => {
@@ -402,11 +404,6 @@
     const showTree = (root, level) => {
         // RSD  Methode
 
-        // if (!table.rows[level]) {
-        //     table.appendChild(document.createElement("tr"))
-        //     table.rows[level].title = `Level : ${level}`
-        // }
-
         const children = {
             left: "",
             right: ""
@@ -421,7 +418,7 @@
         return (`
               <table class="table">
                 <tr>
-                    <td colspan="2" title="Level : ${level}">
+                    <td colspan="2" title="Level : ${level} | count of sub nodes ${root.nodeCount}">
                         ${root.name}
                     </td>
                 </tr>
@@ -450,12 +447,8 @@
             return 1
         }
 
-        return root.nodeCount
+        return root.nodeCount + 1
     }
-
-    // findCountOfSubNodes(root)
-
-
 </script>
 </body>
 </html>
