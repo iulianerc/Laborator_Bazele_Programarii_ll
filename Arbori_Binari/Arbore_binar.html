@@ -3,8 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body{
+            padding-top: 100px;
+        }
+        .table {
+            overflow: auto;
+            border-collapse: collapse;
+            /*border: slateblue 1px solid;*/
+        }
+
+        .table,
+        .table tr {
+            text-align: center;
+        }
+        .table tr td {
+            width: 900px;
+            height: 100px;
+            vertical-align: top;
+        }
+        .addTree {
+            position: absolute;
+            top: 30px;
+            width: 150px;
+            height: 50px;
+            border: coral 2px solid;
+            background-color: transparent;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .addTree:hover {
+            background-color: coral;
+        }
+        #load {
+            left: 30px;
+        }
+        #create {
+            left: 200px;
+        }
+        #showJSON {
+            left: 400px;
+            width: 270px;
+        }
+    </style>
 </head>
 <body>
+<!--                  Template                       -->
 
+<!--    <table class="table">-->
+<!--        <tr>-->
+<!--            <td colspan="2">-->
+<!--                root-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                {{left}}-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                {{right}}-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<button class="addTree" id="create">Create new tree ?</button>
+<button class="addTree" id="load">Load from local ?</button>
+<button class="addTree" id="showJSON">Show JSON from new Tree ?</button>
+
+<div id="tree"></div>
+<div id="JSON"></div>
+<script>
+
+    class Node {
+        constructor(name) {
+            this.name = name
+            this.left = {}
+            this.right = {}
+        }
+    }
+
+    const nodes = ["left", "right"]
+    const data = {
+        name: "root",
+        left: {
+            name: 12,
+            left: {
+                name: "23",
+                left: {
+                    name: "1",
+                    left: {
+                        name: "",
+                    },
+                    right: {
+                        name: "",
+                    }
+                },
+                right: {
+                    name: "25",
+                    left: {
+                        name: "",
+                    },
+                    right: {
+                        name: "",
+                    }
+                }
+            },
+            right: {
+                name: "43",
+                left: {
+                    name: "48",
+                    left: {
+                        name: "98",
+                        left: {
+                            name: "",
+                        },
+                        right: {
+                            name: "",
+                        }
+                    },
+                    right: {
+                        name: "44",
+                        left: {
+                            name: "",
+                        },
+                        right: {
+                            name: "",
+                        }
+                    }
+                },
+                right: {
+                    name: "98",
+                    left: {
+                        name: "",
+                    },
+                    right: {
+                        name: "",
+                    }
+                }
+            }
+        },
+        right: {
+            name: 13,
+            left: {
+                name: "66",
+                left: {
+                    name: "44",
+                    left: {
+                        name: "",
+                    },
+                    right: {
+                        name: "",
+                    }
+                },
+                right: {
+                    name: "33",
+                    left: {
+                        name: "",
+                        left: {
+                            name: "",
+                        },
+                        right: {
+                            name: "",
+                        }
+                    },
+                    right: {
+                        name: "",
+                        left: {
+                            name: "",
+                        },
+                        right: {
+                            name: "55",
+                            left: {
+                                name: "",
+                            },
+                            right: {
+                                name: "",
+                            }
+                        }
+                    }
+                }
+            },
+            right: {
+                name: "76",
+                left: {
+                    name: "",
+                },
+                right: {
+                    name: "",
+                }
+            }
+        }
+    }
+    const tempData = {
+        "name":"root",
+        "left":{
+            "name":"1",
+            "left":{
+                "name":"2",
+                "left":{
+                    "name":"3",
+                    "left":{
+                        "name":"4",
+                        "left":{
+                            "name":"",
+                            "left":{
+
+                            },
+                            "right":{
+
+                            }
+                        },
+                        "right":{
+                            "name":"3",
+                            "left":{
+                                "name":"",
+                                "left":{
+
+                                },
+                                "right":{
+
+                                }
+                            },
+                            "right":{
+                                "name":"2",
+                                "left":{
+                                    "name":"45",
+                                    "left":{
+                                        "name":"6",
+                                        "left":{
+                                            "name":"",
+                                            "left":{
+
+                                            },
+                                            "right":{
+
+                                            }
+                                        },
+                                        "right":{
+                                            "name":"",
+                                            "left":{
+
+                                            },
+                                            "right":{
+
+                                            }
+                                        }
+                                    },
+                                    "right":{
+                                        "name":"7",
+                                        "left":{
+                                            "name":"",
+                                            "left":{
+
+                                            },
+                                            "right":{
+
+                                            }
+                                        },
+                                        "right":{
+                                            "name":"",
+                                            "left":{
+
+                                            },
+                                            "right":{
+
+                                            }
+                                        }
+                                    }
+                                },
+                                "right":{
+                                    "name":"",
+                                    "left":{
+
+                                    },
+                                    "right":{
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "right":{
+                        "name":"",
+                        "left":{
+
+                        },
+                        "right":{
+
+                        }
+                    }
+                },
+                "right":{
+                    "name":"5",
+                    "left":{
+                        "name":"",
+                        "left":{
+
+                        },
+                        "right":{
+
+                        }
+                    },
+                    "right":{
+                        "name":"",
+                        "left":{
+
+                        },
+                        "right":{
+
+                        }
+                    }
+                }
+            },
+            "right":{
+                "name":"",
+                "left":{
+
+                },
+                "right":{
+
+                }
+            }
+        },
+        "right":{
+            "name":"98",
+            "left":{
+                "name":"7",
+                "left":{
+                    "name":"",
+                    "left":{
+
+                    },
+                    "right":{
+
+                    }
+                },
+                "right":{
+                    "name":"",
+                    "left":{
+
+                    },
+                    "right":{
+
+                    }
+                }
+            },
+            "right":{
+                "name":"8",
+                "left":{
+                    "name":"",
+                    "left":{
+
+                    },
+                    "right":{
+
+                    }
+                },
+                "right":{
+                    "name":"",
+                    "left":{
+
+                    },
+                    "right":{
+
+                    }
+                }
+            }
+        }
+    }
+    const tree = document.getElementById("tree")
+    const createTree = document.getElementById("create")
+    const loadTree = document.getElementById("load")
+    const showJSON = document.getElementById("showJSON")
+    const jsonBlock = document.getElementById("JSON")
+    let root = new Node("root")
+
+    createTree.addEventListener("click", () => {
+        root = new Node("root")
+        addCell(root)
+        tree.innerHTML = showTree(root, 0)
+    })
+    loadTree.addEventListener("click", () => {
+        tree.innerHTML = showTree(tempData, 0)
+    })
+    showJSON.addEventListener("click", () => {
+        // Show JSON data in body
+        jsonBlock.innerText = JSON.stringify(root)
+    })
+
+    const addCell = (parent) => {
+        for (const node of nodes) {
+            parent[node] = new Node(prompt(`${parent.name} ------->>>>>>> ${node}`))
+
+            if (parent[node].name) {
+                addCell(parent[node])
+            }
+        }
+    }
+    const showTree = (root, level) => {
+        // RSD  Methode
+
+        // if (!table.rows[level]) {
+        //     table.appendChild(document.createElement("tr"))
+        //     table.rows[level].title = `Level : ${level}`
+        // }
+
+        const children = {
+            left: "",
+            right: ""
+        }
+
+        for (const node of nodes) {
+            if (root[node].name) {
+                children[node] = showTree(root[node], level + 1)
+            }
+        }
+
+        return (`
+              <table class="table">
+                <tr>
+                    <td colspan="2" title="Level : ${level}">
+                        ${root.name}
+                    </td>
+                </tr>
+                <tr>
+                    <td title="Level : ${level + 1}">
+                        ${children.left || "Null" }
+                    </td>
+                    <td title="Level : ${level + 1}">
+                        ${children.right || "Null"}
+                    </td>
+                </tr>
+            </table>
+        `)
+    }
+    const findCountOfSubNodes = (root) => {
+        // SDR Methode
+
+        root.nodeCount = 0
+        for (const node of nodes) {
+            if (root[node].name) {
+                root.nodeCount += findCountOfSubNodes(root[node])
+            }
+        }
+        if (!root.nodeCount) {
+            root.nodeCount = 0
+            return 1
+        }
+
+        return root.nodeCount
+    }
+
+    // findCountOfSubNodes(root)
+
+
+</script>
 </body>
 </html>
