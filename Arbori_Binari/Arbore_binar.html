@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        body{
+        body {
             padding-top: 100px;
         }
+
         .table {
             overflow: auto;
             border-collapse: collapse;
@@ -17,11 +18,13 @@
         .table tr {
             text-align: center;
         }
+
         .table tr td {
             width: 900px;
             height: 100px;
             vertical-align: top;
         }
+
         .addTree {
             position: absolute;
             top: 30px;
@@ -32,15 +35,19 @@
             cursor: pointer;
             font-weight: bold;
         }
+
         .addTree:hover {
             background-color: coral;
         }
+
         #load {
             left: 30px;
         }
+
         #create {
             left: 200px;
         }
+
         #showJSON {
             left: 370px;
             width: 270px;
@@ -199,186 +206,75 @@
         }
     }
     const tempData = {
-        "name":"root",
-        "left":{
-            "name":"1",
-            "left":{
-                "name":"2",
-                "left":{
-                    "name":"3",
-                    "left":{
-                        "name":"4",
-                        "left":{
-                            "name":"",
-                            "left":{
-
-                            },
-                            "right":{
-
-                            }
-                        },
-                        "right":{
-                            "name":"3",
-                            "left":{
-                                "name":"",
-                                "left":{
-
-                                },
-                                "right":{
-
-                                }
-                            },
-                            "right":{
-                                "name":"2",
-                                "left":{
-                                    "name":"45",
-                                    "left":{
-                                        "name":"6",
-                                        "left":{
-                                            "name":"",
-                                            "left":{
-
-                                            },
-                                            "right":{
-
-                                            }
-                                        },
-                                        "right":{
-                                            "name":"",
-                                            "left":{
-
-                                            },
-                                            "right":{
-
-                                            }
-                                        }
-                                    },
-                                    "right":{
-                                        "name":"7",
-                                        "left":{
-                                            "name":"",
-                                            "left":{
-
-                                            },
-                                            "right":{
-
-                                            }
-                                        },
-                                        "right":{
-                                            "name":"",
-                                            "left":{
-
-                                            },
-                                            "right":{
-
-                                            }
-                                        }
-                                    }
-                                },
-                                "right":{
-                                    "name":"",
-                                    "left":{
-
-                                    },
-                                    "right":{
-
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "right":{
-                        "name":"",
-                        "left":{
-
-                        },
-                        "right":{
-
-                        }
-                    }
-                },
-                "right":{
-                    "name":"5",
-                    "left":{
-                        "name":"",
-                        "left":{
-
-                        },
-                        "right":{
-
-                        }
-                    },
-                    "right":{
-                        "name":"",
-                        "left":{
-
-                        },
-                        "right":{
-
-                        }
-                    }
-                }
+        "name": "rote node",
+        "left": {
+            "name": "l1",
+            "left": {
+                "name": "l2",
+                "left": {"name": "", "left": {}, "right": {}},
+                "right": {"name": "", "left": {}, "right": {}},
+                "nodeCount": 0
             },
-            "right":{
-                "name":"",
-                "left":{
-
+            "right": {
+                "name": "l2",
+                "left": {
+                    "name": "l3",
+                    "left": {"name": "", "left": {}, "right": {}},
+                    "right": {"name": "", "left": {}, "right": {}},
+                    "nodeCount": 0
                 },
-                "right":{
-
-                }
-            }
+                "right": {
+                    "name": "l5",
+                    "left": {"name": "", "left": {}, "right": {}},
+                    "right": {"name": "", "left": {}, "right": {}},
+                    "nodeCount": 0
+                },
+                "nodeCount": 2
+            },
+            "nodeCount": 4
         },
-        "right":{
-            "name":"98",
-            "left":{
-                "name":"7",
-                "left":{
-                    "name":"",
-                    "left":{
-
-                    },
-                    "right":{
-
-                    }
+        "right": {
+            "name": "r1",
+            "left": {
+                "name": "r2",
+                "left": {
+                    "name": "r3",
+                    "left": {"name": "", "left": {}, "right": {}},
+                    "right": {"name": "", "left": {}, "right": {}},
+                    "nodeCount": 0
                 },
-                "right":{
-                    "name":"",
-                    "left":{
-
-                    },
-                    "right":{
-
-                    }
-                }
+                "right": {
+                    "name": "t4",
+                    "left": {"name": "", "left": {}, "right": {}},
+                    "right": {"name": "", "left": {}, "right": {}},
+                    "nodeCount": 0
+                },
+                "nodeCount": 2
             },
-            "right":{
-                "name":"8",
-                "left":{
-                    "name":"",
-                    "left":{
-
-                    },
-                    "right":{
-
-                    }
+            "right": {
+                "name": "d4",
+                "left": {
+                    "name": "f3",
+                    "left": {"name": "", "left": {}, "right": {}},
+                    "right": {"name": "", "left": {}, "right": {}},
+                    "nodeCount": 0
                 },
-                "right":{
-                    "name":"",
-                    "left":{
-
-                    },
-                    "right":{
-
-                    }
-                }
-            }
-        }
+                "right": {
+                    "name": "g4",
+                    "left": {"name": "", "left": {}, "right": {}},
+                    "right": {"name": "", "left": {}, "right": {}},
+                    "nodeCount": 0
+                },
+                "nodeCount": 2
+            },
+            "nodeCount": 6
+        },
+        "nodeCount": 12
     }
-    let root = new Node("root")
+    let root
 
     createTree.addEventListener("click", () => {
-        root = new Node("root")
+        root = new Node(prompt('get the first node'))
         addCell(root)
         findCountOfSubNodes(root)
         tree.innerHTML = showTree(root, 0)
@@ -424,7 +320,7 @@
                 </tr>
                 <tr>
                     <td title="Level : ${level + 1}">
-                        ${children.left || "Null" }
+                        ${children.left || "Null"}
                     </td>
                     <td title="Level : ${level + 1}">
                         ${children.right || "Null"}
@@ -449,6 +345,35 @@
 
         return root.nodeCount + 1
     }
+    const sdr = (root = tempData) => {
+        for (const node of nodes) {
+            if (root[node].name) {
+                sdr(root[node])
+            }
+        }
+        console.log(root.name)
+    }
+
+    const rsd = (root = tempData) => {
+        console.log(root.name)
+        for (const node of nodes) {
+            if (root[node].name) {
+                rsd(root[node])
+            }
+        }
+    }
+
+    const srd = (root = tempData) => {
+        for (const node of nodes) {
+            if (node === 'right') {
+                console.log(root.name)
+            }
+            if (root[node].name) {
+                srd(root[node])
+            }
+        }
+    }
+
 </script>
 </body>
 </html>
